@@ -429,6 +429,7 @@ func (p *OAuthProxy) GetRedirect(req *http.Request) (redirect string, err error)
 //	if redirect == "" || !strings.HasPrefix(redirect, "/") || strings.HasPrefix(redirect, "//") {
 //		redirect = "/"
 //	}
+	log.Printf("Yiqian-0: redirect: %s", redirect)
 
 	return
 }
@@ -562,9 +563,10 @@ func (p *OAuthProxy) OAuthCallback(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	if !strings.HasPrefix(redirect, "/") || strings.HasPrefix(redirect, "//") {
-		redirect = "/"
-	}
+//	if !strings.HasPrefix(redirect, "/") || strings.HasPrefix(redirect, "//") {
+//		redirect = "/"
+//	}
+	log.Printf("Yiqian-1: redirect: %s", redirect)
 
 	// set cookie, or deny
 	if p.Validator(session.Email) && p.provider.ValidateGroup(session.Email) {

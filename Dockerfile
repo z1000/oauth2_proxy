@@ -1,13 +1,15 @@
-FROM alpine:3.7
+FROM debian:stable-slim
+MAINTAINER Andrew Huynh <a5thuynh@gmail.com>
 
 # When this Dockerfile was last refreshed (year/month/day)
-ENV REFRESHED_AT 2018-04-11
+ENV REFRESHED_AT 2017-10-24
 ENV OAUTH2_PROXY_VERSION 2.2
 
+# Checkout bitly's latest google-auth-proxy code from Github
 ADD oauth2_proxy ./bin/
 
 # Install CA certificates
-RUN apk add --no-cache --virtual=build-dependencies ca-certificates
+RUN apt-get update -y && apt-get install -y ca-certificates
 
 # Expose the ports we need and setup the ENTRYPOINT w/ the default argument
 # to be pass in.
